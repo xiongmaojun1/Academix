@@ -37,7 +37,7 @@ jobs:
       run: |
         mkdir -p release/academix
         cp bin/academix-${{ matrix.goos }}-${{ matrix.goarch }} release/academix/
-        cp -r skills release/academix/
+        cp SKILL.md release/academix/
         cp -r knowledge release/academix/
         cp -r workflows release/academix/
         cp -r assets release/academix/
