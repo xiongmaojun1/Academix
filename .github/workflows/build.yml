@@ -1,4 +1,4 @@
-name: Build Academix
+name: Build Academix Extract
 
 on:
   push:
@@ -10,8 +10,11 @@ jobs:
     runs-on: ubuntu-latest
     strategy:
       matrix:
-        goos: [windows]
-        goarch: [amd64]
+        goos: [windows, linux, darwin]
+        goarch: [amd64, arm64]
+        exclude:
+          - goos: windows
+            goarch: arm64
 
     steps:
     - uses: actions/checkout@v4
@@ -21,13 +24,8 @@ jobs:
       with:
         go-version: '1.22'
 
-    - name: Build Reasonix (with Academix)
-      env:
-        GOOS: ${{ matrix.goos }}
-        GOARCH: ${{ matrix.goarch }}
-        CGO_ENABLED: '0'
-      run: |
-        go build -ldflags="-s -w" -o bin/reasonix-${{ matrix.goos }}-${{ matrix.goarch }}.exe ./cmd/reasonix
+    - name: Download dependencies
+      run: go mod download
 
     - name: Build academix-extract
       env:
@@ -35,11 +33,10 @@ jobs:
         GOARCH: ${{ matrix.goarch }}
         CGO_ENABLED: '0'
       run: |
-        go build -ldflags="-s -w" -o bin/academix-extract-${{ matrix.goos }}-${{ matrix.goarch }}.exe ./cmd/academix-extract
+        go build -ldflags="-s -w" -o bin/academix-extract-${{ matrix.goos }}-${{ matrix.goarch }} ./cmd/academix-extract
 
     - name: Upload artifacts
       uses: actions/upload-artifact@v4
       with:
-        name: reasonix-${{ matrix.goos }}-${{ matrix.goarch }}
-        path: |
-          bin/*.exe
+        name: academix-extract-${{ matrix.goos }}-${{ matrix.goarch }}
+        path: bin/*
