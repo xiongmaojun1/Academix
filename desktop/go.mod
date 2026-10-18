@@ -1,6 +1,6 @@
 module reasonix/desktop
 
-go 1.25.0
+go 1.26.0
 
 toolchain go1.26.5
 
@@ -14,14 +14,14 @@ require reasonix v0.0.0
 require (
 	aead.dev/minisign v0.3.0
 	fyne.io/systray v1.12.2
-	github.com/godbus/dbus/v5 v5.2.2
+	github.com/godbus/dbus/v5 v5.2.4
 	github.com/minio/selfupdate v0.6.0
 	github.com/tc-hib/winres v0.3.1
-	github.com/wailsapp/wails/v2 v2.12.0
-	golang.org/x/image v0.43.0
-	golang.org/x/mod v0.37.0
-	golang.org/x/sys v0.46.0
-	golang.org/x/text v0.38.0
+	github.com/wailsapp/wails/v2 v2.16.0
+	golang.org/x/image v0.47.0
+	golang.org/x/mod v0.41.0
+	golang.org/x/sys v0.49.0
+	golang.org/x/text v0.43.0
 )
 
 require (
